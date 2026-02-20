@@ -7,11 +7,11 @@ class Section {
 
   renderItems() {
     this._items.forEach((item) => {
-        const todo = this._renderer(item);
-        this.addItem(todo);
+      const todo = this._renderer(item);
+      this.addItem(todo);
     });
   }
-  
+
   addItem(element) {
     this._container.appendChild(element);
   }
