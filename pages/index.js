@@ -14,7 +14,18 @@ const todosList = ".todos__list";
 
 const addTodoPopup = new PopupWithForm({
   popupSelector: "#add-todo-popup",
-  handleFormSubmit: () => {},
+  handleFormSubmit: (inputValues) => {
+    const id = uuidv4();
+
+    const values = { ...inputValues, id: id };
+
+    const todo = new Todo(values, "#todo-template");
+    const todoElement = todo.getView();
+    section.addItem(todoElement);
+
+    addTodoForm.reset();
+    addTodoPopup.close();
+  },
 });
 addTodoPopup.setEventListeners();
 
@@ -34,25 +45,6 @@ section.renderItems();
 
 addTodoButton.addEventListener("click", () => {
   addTodoPopup.open();
-});
-
-addTodoForm.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  const name = evt.target.name.value;
-  const dateInput = evt.target.date.value;
-
-  const date = new Date(dateInput);
-  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-
-  const id = uuidv4();
-
-  const values = { name, date, id };
-  const todo = new Todo(values, "#todo-template");
-  const todoElement = todo.getView();
-  section.addItem(todoElement);
-
-  addTodoForm.reset();
-  addTodoPopup.close();
 });
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
