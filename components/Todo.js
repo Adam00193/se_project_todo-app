@@ -31,7 +31,7 @@ class Todo {
   }
 
   _generateDueDate(dueDate) {
-    this._todoDate.textContent = `Due: ${dueDate.toLocaleString("en-US", {
+    this._todoDateEl.textContent = `Due: ${dueDate.toLocaleString("en-US", {
       year: "numeric",
       month: "short",
       day: "numeric",
